@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import {getTicker} from './utility/httputil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
 import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
@@ -30,7 +31,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      items: []
+      items: [],
+        prevState: {}
     };
   }
 
