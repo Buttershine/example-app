@@ -18,24 +18,30 @@ class TickerPanel extends React.Component {
       <div className="TickerPanel">
         {
           this.props.data.map(function(coin) {
-            return <div class="col-lg-3" key={coin.id}> 
+            return <div class="col-lg-3" key={coin.id}>
                 <div class="currency-tablet">
-                    <h1>{coin.name}</h1>
-                    <div class="">
-                        <span class="col-lg-4 bold">Price: </span>
-                        <span class="col-lg-4 bold">MarketCap: </span>
-                        <span class="col-lg-4 bold">Rank: </span>
-                    </div>
-                    <div class="">
-                        <span class="col-lg-4">${coin.price_usd} </span>
-                        <span class="col-lg-4">{coin.market_cap_usd} </span>
-                        <span class="col-lg-4">{coin.rank} </span>
-                    </div>
-                    <div class="panel">
-                        <h3>Percent Change</h3>
-                        <span className={"col-lg-4 " + (coin.percent_change_1h > 0 ? 'success' : 'warning')}>1h:{coin.percent_change_1h}% </span>
-                        <span class="col-lg-4">24h:{coin.percent_change_24h}% </span>
-                        <span class="col-lg-4">1w:{coin.percent_change_7d}% </span>
+                    <div class="tablet-title">{coin.name}</div>
+                        <div class="tablet-panel-interior">
+                            <div class="row">
+                                <span class="col-lg-4 bold">Price: </span>
+                                <span class="col-lg-4 bold">MarketCap: </span>
+                                <span class="col-lg-4 bold">Rank: </span>
+                            </div>
+                            <div class="row">
+                                <span class="col-lg-4">${coin.price_usd} </span>
+                                <span class="col-lg-4">{coin.market_cap_usd} </span>
+                                <span class="col-lg-4">{coin.rank} </span>
+                            </div>
+                        </div>
+                    <div class="tablet-panel-interior">
+                        <div class="row tablet-panel-interior-title">
+                            Percent Change
+                        </div>
+                        <div class="row">
+                            <span className={"col-lg-4 " + (coin.percent_change_1h > 0 ? 'text-success' : 'text-warning')}>1h:{coin.percent_change_1h}% </span>
+                            <span className={"col-lg-4 " + (coin.percent_change_24 > 0 ? 'text-success' : 'text-warning')}>24h:{coin.percent_change_24h}% </span>
+                            <span className={"col-lg-4 " + (coin.percent_change_7d > 0 ? 'text-success' : 'text-warning')}>1w:{coin.percent_change_7d}% </span>
+                        </div>
                     </div>
                 </div>
             </div>

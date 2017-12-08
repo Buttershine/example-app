@@ -14,3 +14,9 @@ gulp.task('publish', function() {
         public: true
       })); // => File will be uploaded to /www.someawesomesite.com/
 });
+
+gulp.task('build', function() {
+  gulp.src('scripts/*.js')
+      .pipe(build({ GA_ID: '123456' }))
+      .pipe(gulp.dest('dist'))
+});
