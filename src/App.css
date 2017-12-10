@@ -51,6 +51,7 @@
 }
 
 .button-panel {
+  float: left;
   padding-left: 20px;
   margin: 2px;
 }
