@@ -7,6 +7,19 @@ import PercentageDropdown from './dropdowns/percentageDropdown.js';
 import PriceDropdown from './dropdowns/priceDropdown.js';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+	
+String.prototype.formatMoney = (c, d, t) => {
+	var n = this, 
+	    c = isNaN(c = Math.abs(c)) ? 2 : c, 
+	    d = d == undefined ? "." : d, 
+	    t = t == undefined ? "," : t, 
+	    s = n < 0 ? "-" : "", 
+	    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
+	    j = (j = i.length) > 3 ? j % 3 : 0;
+	   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+	};
+
+	console.log(Number.prototype);
 
 class App extends Component {
 
@@ -50,30 +63,18 @@ class App extends Component {
     };
   }
 
-  componentDidMount() { //autoruns
-    var _this = this;
-    getTicker('https://api.coinmarketcap.com/v1/ticker/')
-    .then(function(response){
-      _this.setState({
-        coinList: response.data //assigns the array to the coinList object
-      });
-    })
-    .catch(function(e) {
-      console.log("ERROR ", e);
-    })
-  }
-
   percentageSelect = (evt) => {
+    var temp = {};
     if(evt === 1) {
-      var temp = this.state.coinList.sort(function(a, b) {
+      temp = this.state.coinList.sort(function(a, b) {
         return parseFloat(b.percent_change_1h) - parseFloat(a.percent_change_1h);    
       });
     } else if(evt === 2) {
-      var temp = this.state.coinList.sort(function(a, b) {
+      temp = this.state.coinList.sort(function(a, b) {
       return parseFloat(b.percent_change_24h) - parseFloat(a.percent_change_24h);
       });
     } else if(evt === 3) {
-      var temp = this.state.coinList.sort(function(a, b) {
+      temp = this.state.coinList.sort(function(a, b) {
       return parseFloat(b.percent_change_7d) - parseFloat(a.percent_change_7d);
       });
     }
@@ -83,18 +84,37 @@ class App extends Component {
   }
 
   priceSelect = (evt) => {
+    var temp = {};
     if(evt === 1) {
-      var temp = this.state.coinList.sort(function(a, b) {
+      temp = this.state.coinList.sort(function(a, b) {
         return parseFloat(a.price_usd) - parseFloat(b.price_usd);    
       });
     } else if(evt === 2) {
-      var temp = this.state.coinList.sort(function(a, b) {
+      temp = this.state.coinList.sort(function(a, b) {
       return parseFloat(b.price_usd) - parseFloat(a.price_usd);
       });
     } 
     this.setState({
       coinList: temp //assigns the array to the priceList object
     });
+  }
+
+  componentDidMount() { //autoruns
+    var _this = this;
+    getTicker('https://api.coinmarketcap.com/v1/ticker/')
+    .then(function(response) {
+     //  var temp = {};
+    	// response.data.forEach(function (coin) {
+    	// 	var temp = (coin.market_cap_usd).formatMoney(2, '.', ',');
+    	// 	response.data[response.data.findIndex(x => x.name==coin.name)].market_cap_usd = '$' + (coin.market_cap_usd).formatMoney(2, '.', ',');
+    	// });
+      _this.setState({
+        coinList: response.data //assigns the array to the coinList object
+      });
+    })
+    .catch(function(e) {
+      console.log("ERROR ", e);
+    })
   }
 
 }
