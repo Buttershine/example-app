@@ -39,7 +39,7 @@ class TickerPanel extends React.Component {
                         </div>
                         <div class="row">
                             <span className={"col-lg-4 " + (coin.percent_change_1h > 0 ? 'text-success' : 'text-danger')}>1h:{coin.percent_change_1h}% </span>
-                            <span className={"col-lg-4 " + (coin.percent_change_24 > 0 ? 'text-success' : 'text-danger')}>24h:{coin.percent_change_24h}% </span>
+                            <span className={"col-lg-4 " + (coin.percent_change_24h > 0 ? 'text-success' : 'text-danger')}>24h:{coin.percent_change_24h}% </span>
                             <span className={"col-lg-4 " + (coin.percent_change_7d > 0 ? 'text-success' : 'text-danger')}>1w:{coin.percent_change_7d}% </span>
                         </div>
                     </div>
