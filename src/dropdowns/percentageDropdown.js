@@ -8,7 +8,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
    }
    render() {
      return(
-        <DropdownButton title="Percentage Change" onSelect={this.props.onItemClick.bind(this)}>
+        <DropdownButton title="Percentage Change" onSelect={this.props.percentageSelect.bind(this)}>
           <MenuItem eventKey={1}>1h</MenuItem>
           <MenuItem eventKey={2}>24h</MenuItem>
           <MenuItem eventKey={3}>7d</MenuItem>

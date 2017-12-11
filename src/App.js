@@ -4,6 +4,7 @@ import {getTicker} from './utility/httputil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
 import Child from './dropdowns/child.js';
 import PercentageDropdown from './dropdowns/percentageDropdown.js';
+import PriceDropdown from './dropdowns/priceDropdown.js';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +19,8 @@ class App extends Component {
         </header>
         <div class="row">
           <div class="pull-left button-panel">
-            <PercentageDropdown onItemClick = {this.onItemClick}/>
+            <PercentageDropdown percentageSelect = {this.percentageSelect}/>
+            <PriceDropdown priceSelect = {this.priceSelect}/>
           </div>
         </div>
         <div class="row">
@@ -26,7 +28,7 @@ class App extends Component {
             <div class="header">
             </div>
             <div class="panel panel-default">
-            <TickerPanel data = {this.state.priceList}/>
+            <TickerPanel data = {this.state.coinList}/>
             </div>
           </div>
         </div>
@@ -38,7 +40,7 @@ class App extends Component {
     super();
     this.state = {
       prevState: {},
-      priceList: []
+      coinList: []
     };
   }
 
@@ -53,7 +55,7 @@ class App extends Component {
     getTicker('https://api.coinmarketcap.com/v1/ticker/')
     .then(function(response){
       _this.setState({
-        priceList: response.data //assigns the array to the priceList object
+        coinList: response.data //assigns the array to the coinList object
       });
     })
     .catch(function(e) {
@@ -61,24 +63,40 @@ class App extends Component {
     })
   }
 
-  onItemClick = (evt) => {
+  percentageSelect = (evt) => {
     if(evt === 1) {
-      var temp = this.state.priceList.sort(function(a, b) {
+      var temp = this.state.coinList.sort(function(a, b) {
         return parseFloat(b.percent_change_1h) - parseFloat(a.percent_change_1h);    
       });
     } else if(evt === 2) {
-      var temp = this.state.priceList.sort(function(a, b) {
+      var temp = this.state.coinList.sort(function(a, b) {
       return parseFloat(b.percent_change_24h) - parseFloat(a.percent_change_24h);
       });
     } else if(evt === 3) {
-      var temp = this.state.priceList.sort(function(a, b) {
+      var temp = this.state.coinList.sort(function(a, b) {
       return parseFloat(b.percent_change_7d) - parseFloat(a.percent_change_7d);
       });
     }
     this.setState({
-      priceList: temp //assigns the array to the priceList object
+      coinList: temp //assigns the array to the priceList object
     });
   }
+
+  priceSelect = (evt) => {
+    if(evt === 1) {
+      var temp = this.state.coinList.sort(function(a, b) {
+        return parseFloat(a.price_usd) - parseFloat(b.price_usd);    
+      });
+    } else if(evt === 2) {
+      var temp = this.state.coinList.sort(function(a, b) {
+      return parseFloat(b.price_usd) - parseFloat(a.price_usd);
+      });
+    } 
+    this.setState({
+      coinList: temp //assigns the array to the priceList object
+    });
+  }
+
 }
 
 export default App;
@@ -130,4 +148,23 @@ export default App;
 
 // doParentToggle(){
 //   console.log("hello");
+// }
+
+
+// {
+//     "id": "bitcoin", 
+//     "name": "Bitcoin", 
+//     "symbol": "BTC", 
+//     "rank": "1", 
+//     "price_usd": "15576.5", 
+//     "price_btc": "1.0", 
+//     "24h_volume_usd": "13583700000.0", 
+//     "market_cap_usd": "260642353325", 
+//     "available_supply": "16733050.0", 
+//     "total_supply": "16733050.0", 
+//     "max_supply": "21000000.0", 
+//     "percent_change_1h": "0.42", 
+//     "percent_change_24h": "5.28", 
+//     "percent_change_7d": "35.92", 
+//     "last_updated": "1512951554"
 // }
