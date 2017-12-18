@@ -7,14 +7,18 @@ export default class Login extends Component {
 
         return (
             <div>
-                <input type='text' ref='username' className="form-control" style= placeholder='Username'/>
-                <input type='password' ref='password' className="form-control" style= placeholder='Password'/>
+                <div>
+                    <span>User</span><input type='text' ref='username' className="form-control" style= {{'placeholder':'Username'}}/>
+                </div>
+                <div>
+                    <span>Pass</span><input type='password' ref='password' className="form-control" style= {{'placeholder':'Password'}}/>
+                </div>
                 <button onClick={(event) => this.handleClick(event)} className="btn btn-primary">
                     Login
                 </button>
 
                 {errorMessage &&
-                <p style=>{errorMessage}</p>
+                <p>{errorMessage}</p>
                 }
             </div>
         )
@@ -26,9 +30,4 @@ export default class Login extends Component {
         const creds = { username: username.value.trim(), password: password.value.trim() }
         this.props.onLoginClick(creds)
     }
-}
-
-Login.propTypes = {
-    onLoginClick: PropTypes.func.isRequired,
-    errorMessage: PropTypes.string
 }

@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import Login from './login'
 import Logout from './logout'
-import { loginUser, logoutUser } from '../actions'
+import { loginUser, logoutUser } from '.././actions/authActions'
 
 export default class Navbar extends Component {
 
     render() {
-        const { dispatch, isAuthenticated, errorMessage } = this.props
+        const { dispatch, isAuthenticated, errorMessage } = this.props;
 
         return (
             <nav className='navbar navbar-default'>
@@ -31,10 +31,4 @@ export default class Navbar extends Component {
         )
     }
 
-}
-
-Navbar.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
-    errorMessage: PropTypes.string
 }

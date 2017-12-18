@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react'
 import logo from './logo.svg';
 import {getRequest} from './utility/httpUtil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
@@ -7,10 +7,9 @@ import PercentageDropdown from './components/dropdowns/percentageDropdown.js';
 import PriceDropdown from './components/dropdowns/priceDropdown.js';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { connect } from 'react-redux'
-import { loginUser, fetchQuote, fetchSecretQuote } from '../authActions'
-import Login from '../components/login'
-import Navbar from '../components/navbar'
+import { loginUser, fetchQuote, fetchSecretQuote } from './actions/authActions'
+import Login from './components/login'
+import Navbar from './components/navbar'
 import Button from "react-bootstrap/es/Button";
 	
 String.prototype.formatMoney = (c, d, t) => {
@@ -29,7 +28,9 @@ String.prototype.formatMoney = (c, d, t) => {
 class App extends Component {
 
   render() {
-    return (
+      const { dispatch, isAuthenticated, errorMessage } = this.props;
+
+      return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -134,6 +135,20 @@ class App extends Component {
     getRequest()
   }
 
+}
+
+function mapStateToProps(state) {
+
+    const {quotes, auth} = state
+    const {quote, authenticated} = quotes
+    const {isAuthenticated, errorMessage} = auth
+
+    return {
+        quote,
+        isSecretQuote: authenticated,
+        isAuthenticated,
+        errorMessage
+    }
 }
 
 export default App;

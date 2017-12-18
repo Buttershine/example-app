@@ -13,7 +13,3 @@ export default class Logout extends Component {
     }
 
 }
-
-Logout.propTypes = {
-    onLogoutClick: PropTypes.func.isRequired
-}
