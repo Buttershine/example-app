@@ -1,6 +1,6 @@
 var axios = require('axios');
 
-export function getTicker(url){
+export function getRequest(url){
   return axios.get(url);
 }
 

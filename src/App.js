@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {getTicker} from './utility/httputil.js';
+import {getRequest} from './utility/httputil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
 import Child from './dropdowns/child.js';
 import PercentageDropdown from './dropdowns/percentageDropdown.js';
 import PriceDropdown from './dropdowns/priceDropdown.js';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/es/Button";
 	
 String.prototype.formatMoney = (c, d, t) => {
 	var n = this, 
@@ -34,6 +35,7 @@ class App extends Component {
           <div class="pull-left button-panel">
             <PercentageDropdown percentageSelect = {this.percentageSelect}/>
             <PriceDropdown priceSelect = {this.priceSelect}/>
+            <Button type={button} onClick={this.callBackend}/>
           </div>
         </div>
         <div class="row">
@@ -101,7 +103,7 @@ class App extends Component {
 
   componentDidMount() { //autoruns
     var _this = this;
-    getTicker('https://api.coinmarketcap.com/v1/ticker/')
+    getRequest('https://api.coinmarketcap.com/v1/ticker/')
     .then(function(response) {
      //  var temp = {};
     	// response.data.forEach(function (coin) {
@@ -115,6 +117,10 @@ class App extends Component {
     .catch(function(e) {
       console.log("ERROR ", e);
     })
+  }
+
+  callBackend() {
+    getRequest()
   }
 
 }
