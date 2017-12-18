@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {getRequest} from './utility/httputil.js';
+import {getRequest} from './utility/httpUtil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
-import Child from './dropdowns/child.js';
-import PercentageDropdown from './dropdowns/percentageDropdown.js';
-import PriceDropdown from './dropdowns/priceDropdown.js';
+import Child from './components/dropdowns/child.js';
+import PercentageDropdown from './components/dropdowns/percentageDropdown.js';
+import PriceDropdown from './components/dropdowns/priceDropdown.js';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { connect } from 'react-redux'
+import { loginUser, fetchQuote, fetchSecretQuote } from '../authActions'
+import Login from '../components/login'
+import Navbar from '../components/navbar'
 import Button from "react-bootstrap/es/Button";
 	
 String.prototype.formatMoney = (c, d, t) => {
@@ -33,9 +37,16 @@ class App extends Component {
         </header>
         <div class="row">
           <div class="pull-left button-panel">
-            <PercentageDropdown percentageSelect = {this.percentageSelect}/>
-            <PriceDropdown priceSelect = {this.priceSelect}/>
-            <Button type={button} onClick={this.callBackend}/>
+              <div>
+                  <Navbar
+                      isAuthenticated={isAuthenticated}
+                      errorMessage={errorMessage}
+                      dispatch={dispatch}
+                  />
+              </div>
+            {/*<PercentageDropdown percentageSelect = {this.percentageSelect}/>*/}
+            {/*<PriceDropdown priceSelect = {this.priceSelect}/>*/}
+            {/*<Button type={button} onClick={this.callBackend}/>*/}
           </div>
         </div>
         <div class="row">
