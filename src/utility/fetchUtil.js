@@ -2,7 +2,7 @@ export function loginUser(creds) {
 
     let config = {
         method: 'POST',
-        headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type':'application/json' },
         body: `username=${creds.username}&password=${creds.password}`
     }
 
