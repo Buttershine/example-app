@@ -3,7 +3,7 @@
 import { combineReducers } from 'redux'
 import {
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS
-} from './actions'
+} from '../actions/authActions'
 
 // The auth reducer. The starting state sets authentication
 // based on a token being in local storage. In a real app,

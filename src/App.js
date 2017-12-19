@@ -1,16 +1,25 @@
 import React, { Component, PropTypes } from 'react'
-import logo from './logo.svg';
-import {getRequest} from './utility/httpUtil.js';
-import TickerPanel from './tickerPanel/tickerPanel.jsx';
-import Child from './components/dropdowns/child.js';
-import PercentageDropdown from './components/dropdowns/percentageDropdown.js';
-import PriceDropdown from './components/dropdowns/priceDropdown.js';
-import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { connect } from 'react-redux'
 import { loginUser, fetchQuote, fetchSecretQuote } from './actions/authActions'
 import Login from './components/login'
 import Navbar from './components/navbar'
-import Button from "react-bootstrap/es/Button";
+import { render } from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
+import quotesApp from './reducers/authReducers'
+import thunkMiddleware from 'redux-thunk'
+import api from './middleware/api'
+import logo from './logo.svg';
+import {getRequest} from './utility/httpUtil.js';
+import TickerPanel from './tickerPanel/tickerPanel.jsx';
+import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+
+let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore)
+
+let store = createStoreWithMiddleware(quotesApp)
+
+let rootElement = document.getElementById('root')
 	
 String.prototype.formatMoney = (c, d, t) => {
 	var n = this, 
@@ -137,11 +146,13 @@ class App extends Component {
 
 }
 
+// These props come from the application's
+// state when it is started
 function mapStateToProps(state) {
 
-    const {quotes, auth} = state
-    const {quote, authenticated} = quotes
-    const {isAuthenticated, errorMessage} = auth
+    const { quotes, auth } = state
+    const { quote, authenticated } = quotes
+    const { isAuthenticated, errorMessage } = auth
 
     return {
         quote,
@@ -151,7 +162,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default App;
+export default connect(mapStateToProps)(App)
 
 //************************************************************
 // <PercentageDropdown onItemClick = {this.doParentToggle} /> : the onItemClick is the binding you reference in your child class e.g. onSelect={this.props.onItemClick.bind(this)} <DropdownButton title="Percentage Change" onSelect={this.props.onItemClick.bind(this)}>

@@ -30,18 +30,24 @@ function loginError(message) {
 }
 
 export function loginUser(creds) {
-
+//username=${creds.username}&password=${creds.password}`
     let config = {
         method: 'POST',
         headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-        body: `username=${creds.username}&password=${creds.password}`
+        body:  JSON.stringify({
+          user : {
+              username:creds.username,
+              email:creds.username,
+              password:creds.password
+          }
+        })
     }
 
     return dispatch => {
         // We dispatch requestLogin to kickoff the call to the API
         dispatch(requestLogin(creds))
 
-        return fetch('http://localhost:3001/sessions/create', config)
+        return fetch('https://us-central1-example-app-188303.cloudfunctions.net/api/users', config)
             .then(response =>
                 response.json().then(user => ({ user, response }))
             ).then(({ user, response }) =>  {
