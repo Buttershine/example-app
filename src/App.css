@@ -59,3 +59,17 @@
 .button-panel-text {
 
 }
+
+.button-panel-button {
+  margin-left: 2px;
+}
+
+.login-panel {
+  color: white;
+}
+
+.login-panel-label {
+  margin-right: 2px;
+  margin-left: 5px;
+  color: white;
+}

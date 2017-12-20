@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { loginUser, fetchQuote, fetchSecretQuote } from './actions/authActions'
-import Login from './components/login'
 import Navbar from './components/navbar'
 import { render } from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
@@ -13,6 +12,9 @@ import {getRequest} from './utility/httpUtil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import PercentageDropdown from "./components/dropdowns/percentageDropdown";
+import PriceDropdown from "./components/dropdowns/priceDropdown";
+import Button from "react-bootstrap/es/Button";
 
 
 let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore)
@@ -46,17 +48,23 @@ class App extends Component {
           <h1 className="App-title">Some Awesome Crypto</h1>
         </header>
         <div class="row">
-          <div class="pull-left button-panel">
-              <div>
-                  <Navbar
-                      isAuthenticated={isAuthenticated}
-                      errorMessage={errorMessage}
-                      dispatch={dispatch}
-                  />
+          <div class="col-xs-12 col-md-8">
+            <div class="btn-group btn-group-justified">
+              <div class="btn-group">
+                <PercentageDropdown percentageSelect = {this.percentageSelect}/>
+                <PriceDropdown priceSelect = {this.priceSelect}/>
               </div>
-            {/*<PercentageDropdown percentageSelect = {this.percentageSelect}/>*/}
-            {/*<PriceDropdown priceSelect = {this.priceSelect}/>*/}
-            {/*<Button type={button} onClick={this.callBackend}/>*/}
+            </div>
+                {/*<Button type={button} onClick={this.callBackend}/>*/}
+          </div>
+          <div class="col-xs-6 col-md-4">
+            <div>
+              <Navbar
+                  isAuthenticated={isAuthenticated}
+                  errorMessage={errorMessage}
+                  dispatch={dispatch}
+              />
+            </div>
           </div>
         </div>
         <div class="row">
