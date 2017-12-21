@@ -44,7 +44,6 @@ function auth(state = {
 // The quotes reducer
 function quotes(state = {}, action) {
     switch (action.type) {
-
         default:
             return state
     }

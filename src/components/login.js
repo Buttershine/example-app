@@ -15,18 +15,22 @@ export default class Login extends Component {
         const { errorMessage } = this.props
 
         return (
-            <form class="form-inline">
-                <div class="form-group">
-                    <label class="login-panel-label">Username</label><input ref='username' type='text' class="form-control" placeholder={"Username"}/>
-                    <label class="login-panel-label">Password</label><input ref='password' type='password' class="form-control" placeholder={"Password"}/>
-                    {/*{errorMessage &&*/}
-                    {/*<p>{errorMessage}</p>*/}
-                    {/*}*/}
+            <div>
+                <div class="form-inline">
+                    <div class="form-group .col-md-8">
+                        <label class="login-panel-label">Username</label><input ref='username' type='text' class="form-control" placeholder={"Username"}/>
+                        <label class="login-panel-label">Password</label><input ref='password' type='password' class="form-control" placeholder={"Password"}/>
+                        {/*{errorMessage &&*/}
+                        {/*<p>{errorMessage}</p>*/}
+                        {/*}*/}
+                    </div>
+                    <div class=".col-md-4">
+                        <button onClick={(event) => this.handleClick(event)} className="btn btn-primary button-panel-button">
+                            Login
+                        </button>
+                    </div>
                 </div>
-                <button onClick={(event) => this.handleClick(event)} className="btn btn-primary button-panel-button">
-                    Login
-                </button>
-            </form>
+            </div>
         )
     }
 
