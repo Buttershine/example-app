@@ -2,15 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { loginUser, fetchQuote, fetchSecretQuote } from './actions/authActions'
 import AuthModal from './components/authentication/authModal'
-import { createStore, applyMiddleware } from 'redux'
-import quotesApp from './reducers/authReducers'
-import thunkMiddleware from 'redux-thunk'
-import api from './middleware/api'
+import { ButtonGroup } from 'react-bootstrap';
 import logo from './logo.svg';
-import {getRequest} from './utility/httpUtil.js';
+import { getRequest } from './utility/httpUtil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
 import PercentageDropdown from "./components/dropdowns/percentageDropdown";
 import PriceDropdown from "./components/dropdowns/priceDropdown";
+import LoginTopMenu from "./components/authentication/loginTopMenu";
 
 String.prototype.formatMoney = (c, d, t) => {
     var n = this,
@@ -33,6 +31,7 @@ class App extends Component {
         return (
             <div className="App">
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"></link>
+                <LoginTopMenu />
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 className="App-title">Some Awesome Crypto</h1>
@@ -45,10 +44,10 @@ class App extends Component {
                 <div class="row">
                     <div class="col-xs-12 col-md-8">
                         <div class="btn-group btn-group-justified">
-                            <div class="btn-group">
+                            <ButtonGroup>
                                 <PercentageDropdown percentageSelect = {this.percentageSelect}/>
                                 <PriceDropdown priceSelect = {this.priceSelect}/>
-                            </div>
+                            </ButtonGroup>
                         </div>
                     </div>
                 </div>

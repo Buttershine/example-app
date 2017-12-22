@@ -10,7 +10,10 @@ export default class Login extends Component {
             username: '',
             password: ''
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleInputChange = {
+            username: this.handleChange.bind(this, 'username'),
+            password: this.handleChange.bind(this, 'password'),
+        }
     }
 
     render() {
@@ -21,7 +24,7 @@ export default class Login extends Component {
                 <Form horizontal>
                     <FormGroup>
                         <Col sm={6}>
-                            <FormControl ref='username' type='text' class="form-control" placeholder={"Username"}/>
+                            <FormControl value={this.state.username} onChange={this.handleInputChange.username} ref='username' type='text' class="form-control" placeholder={"Username"}/>
                         </Col>
                     </FormGroup>
                     <FormGroup>
@@ -44,11 +47,15 @@ export default class Login extends Component {
         )
     }
 
-    handleChange(e, prop){
-        let change = {}
-        debugger;
-        change[e.target.name] = e.target.value;
-        this.setState(change)
+    // handleChange(e, prop){
+    //     let change = {}
+    //     debugger;
+    //     change[e.target.name] = e.target.value;
+    //     this.setState(change)
+    // }
+
+    handleChange(key, e) {
+        this.setState({[key]: e.target.value})
     }
 
     handleClick(event) {
