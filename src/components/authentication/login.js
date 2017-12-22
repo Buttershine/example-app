@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {Form, FormGroup, FormControl, Col, Button} from 'react-bootstrap'
+import VertBar from '../miscellaneous/vertBar.js'
 
 export default class Login extends Component {
     constructor() {
@@ -32,8 +33,9 @@ export default class Login extends Component {
                     {/*<p>{errorMessage}</p>*/}
                     {/*}*/}
                 <FormGroup>
-                    <Col sm={6}>
+                    <Col sm={12}>
                         <Button onClick={(event) => this.handleClick(event)} ref="login" className="btn btn-primary button-panel-button">Login</Button>
+                        {/*<VertBar/>*/}
                         <Button onClick={(event) => this.handleClick(event)} ref="register" className="btn btn-primary button-panel-button">Register</Button>
                     </Col>
                 </FormGroup>
