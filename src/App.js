@@ -9,16 +9,8 @@ import api from './middleware/api'
 import logo from './logo.svg';
 import {getRequest} from './utility/httpUtil.js';
 import TickerPanel from './tickerPanel/tickerPanel.jsx';
-import './App.css';
 import PercentageDropdown from "./components/dropdowns/percentageDropdown";
 import PriceDropdown from "./components/dropdowns/priceDropdown";
-
-
-let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore)
-
-let store = createStoreWithMiddleware(quotesApp)
-
-let rootElement = document.getElementById('root')
 
 String.prototype.formatMoney = (c, d, t) => {
     var n = this,

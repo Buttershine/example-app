@@ -19,26 +19,26 @@ export default class Login extends Component {
         return (
             <div>
                 <Form horizontal>
-                <FormGroup>
-                    <Col sm={6}>
-                        <FormControl ref='username' type='text' class="form-control" placeholder={"Username"}/>
-                    </Col>
-                </FormGroup>
-                <FormGroup>
-                    <Col sm={6}>
-                        <FormControl ref='password' type='password' class="form-control" placeholder={"Password"}/>
-                    </Col>
-                </FormGroup>
-                    {/*{errorMessage &&*/}
-                    {/*<p>{errorMessage}</p>*/}
-                    {/*}*/}
-                <FormGroup>
-                    <Col sm={12}>
-                        <Button onClick={(event) => this.handleClick(event)} ref="login" className="btn btn-primary button-panel-button">Login</Button>
-                        {/*<VertBar/>*/}
-                        <Button onClick={(event) => this.handleClick(event)} ref="register" className="btn btn-primary button-panel-button">Register</Button>
-                    </Col>
-                </FormGroup>
+                    <FormGroup>
+                        <Col sm={6}>
+                            <FormControl ref='username' type='text' class="form-control" placeholder={"Username"}/>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup>
+                        <Col sm={6}>
+                            <FormControl ref='password' type='password' class="form-control" placeholder={"Password"}/>
+                        </Col>
+                    </FormGroup>
+                        {/*{errorMessage &&*/}
+                        {/*<p>{errorMessage}</p>*/}
+                        {/*}*/}
+                    <FormGroup>
+                        <Col sm={12}>
+                            <Button onClick={(event) => this.handleClick(event)} ref="login" className="btn btn-primary button-panel-button">Login</Button>
+                            {/*<VertBar/>*/} <span> or </span>
+                            <Button onClick={(event) => this.handleClick(event)} ref="register" className="btn btn-primary button-panel-button">Register</Button>
+                        </Col>
+                    </FormGroup>
                 </Form>
             </div>
         )

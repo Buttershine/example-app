@@ -25,7 +25,10 @@ export default class AuthModal extends Component {
             <div>
                 <Modal show={this.state.authModalShow} onHide={this.closeModal}>
                     <Modal.Header>
-                        <Modal.Title>Login or Register</Modal.Title>
+                        <Button onClick={this.closeModal} sm={4} type="button" className={"close"} aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </Button>
+                        <Modal.Title sm={7}>Login or Register</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {!isAuthenticated &&
@@ -40,7 +43,6 @@ export default class AuthModal extends Component {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.closeModal}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

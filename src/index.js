@@ -6,16 +6,20 @@ import App from './App'
 import quotesApp from './reducers/authReducers'
 import thunkMiddleware from 'redux-thunk'
 import api from './middleware/api'
+import './App.css';
+
 
 let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore)
 
 let store = createStoreWithMiddleware(quotesApp)
 
-let rootElement = document.getElementById('root')
+document.addEventListener("DOMContentLoaded", () => {
+    const rootElement = document.getElementById('root')
+    render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+        rootElement
+    )
+});
 
-render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    rootElement
-)
