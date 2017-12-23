@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import {Form, FormGroup, FormControl, Col, Button} from 'react-bootstrap'
 import VertBar from '../miscellaneous/vertBar.js'
 
-export default class Login extends Component {
+export default class Register extends Component {
     constructor() {
         super()
 
@@ -18,7 +18,7 @@ export default class Login extends Component {
 
         return (
             <div>
-                <Button onClick={(event) => this.handleClick(event)} ref="login" className="btn btn-primary button-panel-button">Login</Button>
+                <Button onClick={(event) => this.handleClick(event)} ref="login" className="btn btn-primary button-panel-button">Register</Button>
             </div>
         )
     }

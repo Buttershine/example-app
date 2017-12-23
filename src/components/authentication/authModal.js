@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import Login from './login'
+import Register from './register'
 import Logout from './logout'
-import { Modal, Button, ModalBody, ModalFooter} from 'react-bootstrap';
-import { loginUser, logoutUser } from '../../actions/authActions'
+import { Modal, Button, Form, FormGroup, FormControl, Col} from 'react-bootstrap';
+
+import {loginUser, logoutUser, registerUser} from '../../actions/authActions'
 
 export default class AuthModal extends Component {
 
@@ -10,8 +12,14 @@ export default class AuthModal extends Component {
         super(props);
 
         this.state = {
-            name: '',
+            username: '',
+            password: '',
             authModalShow: true
+        }
+
+        this.handleInputChange = {
+            username: this.handleChange.bind(this, 'username'),
+            password: this.handleChange.bind(this, 'password'),
         }
 
         this.closeModal = this.closeModal.bind(this);
@@ -31,16 +39,42 @@ export default class AuthModal extends Component {
                         <Modal.Title sm={7}>Login or Register</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {!isAuthenticated &&
-                        <Login
-                            errorMessage={errorMessage}
-                            onLoginClick={ creds => dispatch(loginUser(creds)) }
-                        />
-                        }
-                        {isAuthenticated &&
-                        <Logout onLogoutClick={() => dispatch(logoutUser())} />
-                        }
-
+                        <Form horizontal>
+                            <FormGroup>
+                                <Col sm={6}>
+                                    <FormControl value={this.state.username} onChange={this.handleInputChange.username} ref='username' type='text' class="form-control" placeholder={"Username"}/>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup>
+                                <Col sm={6}>
+                                    <FormControl value={this.state.password} onChange={this.handleInputChange.password} ref='password' type='password' class="form-control" placeholder={"Password"}/>
+                                </Col>
+                            </FormGroup>
+                            {/*{errorMessage &&*/}
+                            {/*<p>{errorMessage}</p>*/}
+                            {/*}*/}
+                            <FormGroup>
+                                <Col xs={1}>
+                                    <Login
+                                        username={this.state.username}
+                                        password={this.state.password}
+                                        errorMessage={errorMessage}
+                                        onLoginClick={ creds => dispatch(loginUser(creds)) }
+                                    />
+                                </Col>
+                                <Col xs={1}>
+                                </Col>
+                                <Col xs={1}>
+                                    <Register username={this.state.username}
+                                              password={this.state.password}
+                                              errorMessage={errorMessage}
+                                              onLoginClick={ creds => dispatch(registerUser(creds)) }/>
+                                </Col>
+                            </FormGroup>
+                        </Form>
+                        {/*{isAuthenticated &&*/}
+                        {/*<Logout onLogoutClick={() => dispatch(logoutUser())} />*/}
+                        {/*}*/}
                     </Modal.Body>
                     <Modal.Footer>
                     </Modal.Footer>
@@ -55,6 +89,10 @@ export default class AuthModal extends Component {
 
     openModal(){
         this.setState({ authModalShow: true });
+    }
+
+    handleChange(key, e) {
+        this.setState({[key]: e.target.value})
     }
 
 }
