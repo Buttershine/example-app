@@ -16,7 +16,8 @@ function receiveLogin(user) {
         type: LOGIN_SUCCESS,
         isFetching: false,
         isAuthenticated: true,
-        id_token: user.token
+        id_token: user.token,
+        showModal: false
     }
 }
 
@@ -94,7 +95,7 @@ export function registerUser(creds) {
                     // If login was successful, set the token in local storage
                     localStorage.setItem('id_token', user.token)
                     // Dispatch the success action
-                    dispatch(receiveLogin(user))
+                    dispatch(receiveRegistration(user))
                 }
             }).catch(err => console.log("Error: ", err))
     }
@@ -147,12 +148,13 @@ function requestRegistration(creds) {
     }
 }
 
-function recieveRegistration(user) {
+function receiveRegistration(user) {
     return {
         type: REGISTER_SUCCESS,
         isFetching: false,
         isAuthenticated: true,
-        id_token: user.token
+        id_token: user.token,
+        showModal: false
     }
 }
 

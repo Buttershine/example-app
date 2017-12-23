@@ -36,7 +36,8 @@ export default class Login extends Component {
         const password = this.props.password
         if(this.props.username && this.props.password){
             const creds = { username: username, password: password }
-            this.props.onLoginClick(creds)
+            this.props.onLoginClick(creds);
+            this.props.closeAuthModal();
         }else {
             this.state.errorMessage = "Please Enter a Valid Username and Password"
         }

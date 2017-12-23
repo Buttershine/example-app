@@ -59,6 +59,7 @@ export default class AuthModal extends Component {
                                         username={this.state.username}
                                         password={this.state.password}
                                         errorMessage={errorMessage}
+                                        closeAuthModal={this.closeModal}
                                         onLoginClick={ creds => dispatch(loginUser(creds)) }
                                     />
                                 </Col>
@@ -68,6 +69,7 @@ export default class AuthModal extends Component {
                                     <Register username={this.state.username}
                                               password={this.state.password}
                                               errorMessage={errorMessage}
+                                              closeAuthModal={this.closeModal}
                                               onLoginClick={ creds => dispatch(registerUser(creds)) }/>
                                 </Col>
                             </FormGroup>
