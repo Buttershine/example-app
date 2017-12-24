@@ -14,7 +14,7 @@ export default class AuthModal extends Component {
         this.state = {
             username: '',
             password: '',
-            authModalShow: true
+            authModalShow: !this.props.isAuthenticated
         }
 
         this.handleInputChange = {
@@ -28,6 +28,7 @@ export default class AuthModal extends Component {
 
     render() {
         const { dispatch, isAuthenticated, errorMessage } = this.props
+
 
         return (
             <div>
