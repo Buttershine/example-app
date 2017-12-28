@@ -27,7 +27,7 @@ export default class AuthModal extends Component {
     }
 
     render() {
-        const { dispatch, isAuthenticated, errorMessage } = this.props
+        const { dispatch, isAuthenticated, errorMessage } = this.props;
 
 
         return (

@@ -9,6 +9,7 @@ import TickerPanel from './tickerPanel/tickerPanel.jsx';
 import PercentageDropdown from "./components/dropdowns/percentageDropdown";
 import PriceDropdown from "./components/dropdowns/priceDropdown";
 import LoginTopMenu from "./components/authentication/loginTopMenu";
+import Logout from "./components/authentication/logout";
 
 // String.prototype.formatMoney = (c, d, t) => {
 //     var n = this,
@@ -33,7 +34,10 @@ class App extends Component {
         return (
             <div className="App">
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"></link>
-                <LoginTopMenu />
+                <LoginTopMenu
+                    isAuthenticated={isAuthenticated}
+                    dispatch={dispatch}
+                />
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 className="App-title">Some Awesome Crypto</h1>
@@ -80,6 +84,9 @@ class App extends Component {
         };
     }
 
+    //HTML Methods
+
+    //Helper Methods
     percentageSelect = (evt) => {
         var temp = {};
         if(evt === 1) {
