@@ -126,7 +126,7 @@ function receiveLogout() {
 }
 
 // Logs the user out
-export function logoutUser() {
+export function logoutUser(creds) {
     let config = {
         method: 'POST',
         headers: { 'Content-Type':'application/json' },

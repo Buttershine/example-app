@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
+import * as NumberFormat from 'react-number-format';
+//https://www.npmjs.com/package/react-number-format
 class TickerPanel extends React.Component {
+
     getInitialState() {
         return {
            data: {
@@ -21,6 +23,7 @@ class TickerPanel extends React.Component {
             return <div class="col-lg-3" key={coin.id}>
                 <div class="currency-tablet">
                     <div class="tablet-title">{coin.name}</div>
+                    <img className={"panel-icon"} src={coin.imageUrl}/>
                         <div class="tablet-panel-interior">
                             <div class="row">
                                 <span class="col-lg-4 bold">Price: </span>
@@ -28,8 +31,8 @@ class TickerPanel extends React.Component {
                                 <span class="col-lg-4 bold">Rank: </span>
                             </div>
                             <div class="row">
-                                <span class="col-lg-4">${coin.price_usd} </span>
-                                <span class="col-lg-4">{coin.market_cap_usd} </span>
+                                <span class="col-lg-4"><NumberFormat value={coin.price_usd} displayType={'text'} thousandSeparator={true} prefix={'$'}/></span>
+                                <span class="col-lg-4"><NumberFormat value={coin.market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'}/></span>
                                 <span class="col-lg-4">{coin.rank} </span>
                             </div>
                         </div>

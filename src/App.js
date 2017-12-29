@@ -11,22 +11,6 @@ import PriceDropdown from "./components/dropdowns/priceDropdown";
 import LoginTopMenu from "./components/authentication/loginTopMenu";
 import Logout from "./components/authentication/logout";
 
-// String.prototype.formatMoney = (c, d, t) => {
-//     var n = this,
-//         c = isNaN(c = Math.abs(c)) ? 2 : c,
-//         d = d == undefined ? "." : d,
-//         t = t == undefined ? "," : t,
-//         s = n < 0 ? "-" : "",
-//         i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
-//         j = (j = i.length) > 3 ? j % 3 : 0;
-//     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-// };
-// import { createStore } from 'redux'
-// import quotesApp from './reducers/authReducers'
-//
-// let store = createStore(quotesApp)
-// console.log(store.getState());
-
 class App extends Component {
 
     render() {
@@ -123,22 +107,49 @@ class App extends Component {
         });
     }
 
-    componentDidMount() { //autoruns
+    makeRequest = async () => {
+
+        const task1 = getRequest('https://api.coinmarketcap.com/v1/ticker/');
+        const task2 = getRequest('https://min-api.cryptocompare.com/data/all/coinlist');
+
+        return {
+            result1: await task1,
+            result2: await task2
+        }
+    }
+
+    componentDidMount = async () => { //autoruns
         var _this = this;
-        getRequest('https://api.coinmarketcap.com/v1/ticker/')
-            .then(function(response) {
-                //    var temp = {};
-                // response.data.forEach(function (coin) {
-                // 	var temp = (coin.market_cap_usd).formatMoney(2, '.', ',');
-                // 	response.data[response.data.findIndex(x => x.name==coin.name)].market_cap_usd = '$' + (coin.market_cap_usd).formatMoney(2, '.', ',');
-                // });
-                _this.setState({
-                    coinList: response.data //assigns the array to the coinList object
-                });
-            })
-            .catch(function(e) {
-                console.log("ERROR ", e);
-            })
+
+        let response = await this.makeRequest();
+        let coinData = [];
+        response.result1.data.forEach(function(cmCoin) {
+            // Object.keys(response.result2.data.Data).forEach(function(trait) {
+            //     const val = response.result2.data.Data[key];
+            //     // use val
+            // });
+            for(var key in response.result2.data.Data) {
+                var value = response.result2.data.Data[key];
+                if(cmCoin.name === value.CoinName) {
+                    cmCoin.imageUrl = 'https://www.cryptocompare.com'+ value.ImageUrl;
+                }
+            }
+            // for(var ccCoin in response.result2.data.Data[cmCoin.name]) {
+            //     debugger;
+            //     if(cmCoin.name == ccCoin.CoinName) {
+            //         debugger;
+            //     }
+            // }
+        });
+        //    var temp = {};
+        // response.data.forEach(function (coin) {
+        //
+        //     response.data[response.data.findIndex(x => x.name==coin.name)].market_cap_usd = '$' + (coin.market_cap_usd).formatMoney(2, '.', ',');
+        // });
+        _this.setState({
+            coinList: response.result1.data //assigns the array to the coinList object
+        });
+
     }
 
     callBackend() {
